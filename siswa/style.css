@@ -1,0 +1,241 @@
+:root {
+    --bg: #f4f6f9;
+    --text: #2c3e50;
+    --sidebar-bg: #2c3e50;
+    --sidebar-text: white;
+    --primary: #4e73df;
+    --primary-dark: #224abe;
+    --table-header: #4e73df;
+    --footer-bg: #2c3e50;
+}
+
+[data-theme="dark"] {
+    --bg: #1e1e2f;
+    --text: #e0e0e0;
+    --sidebar-bg: #111827;
+    --sidebar-text: #f4f6f9;
+    --primary: #375ab7;
+    --primary-dark: #1f3d8f;
+    --table-header: #375ab7;
+    --footer-bg: #111827;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    background-color: var(--sidebar-bg);
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+}
+.sidebar h2 {
+    color: var(--sidebar-text);
+    text-align: center;
+    margin-bottom: 30px;
+}
+.sidebar a {
+    display: block;
+    color: var(--sidebar-text);
+    padding: 12px 20px;
+    text-decoration: none;
+    transition: 0.3s;
+    border-radius: 8px;
+}
+.sidebar a:hover {
+    background-color: var(--primary);
+}
+
+/* Konten */
+.content {
+    margin-left: 230px;
+    padding: 30px;
+}
+
+/* Input, Textarea, Select */
+textarea, input[type="text"], input[type="date"], input[type="file"], select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    resize: vertical;
+}
+input[readonly] {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+/* Tombol */
+button, input[type="submit"] {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+button:hover, input[type="submit"]:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: var(--footer-bg);
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 230px);
+    margin-left: 230px;
+}
+
+/* Tombol Switch Tema */
+.theme-switch-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: var(--primary);
+}
+input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+/* Tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+table, th, td {
+    border: 1px solid #ddd;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background-color: var(--table-header);
+    color: white;
+}
+
+/* Search */
+form input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+form button {
+    padding: 10px 16px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+form button:hover {
+    background: var(--primary-dark);
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+.pagination a {
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 0 4px;
+    background: #eee;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+.pagination a.active,
+.pagination a:hover {
+    background: var(--primary);
+    color: white;
+}
+#preview {
+    display: block;
+    margin: 10px auto;
+    max-width: 200px;
+    border-radius: 10px;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .content {
+        margin-left: 0;
+        padding: 20px;
+    }
+    footer {
+        width: 100%;
+        margin-left: 0;
+    }
+}
