@@ -37,6 +37,135 @@ $data = mysqli_query($conn, "SELECT j.*, e.nama_ekskul FROM siswa_eskul se
 <?php include 'header.php'; ?>
 <?php include 'sidebar.php'; ?>
 
+<style>
+    body {
+        margin-top: 25px;
+    }
+
+    .btn-edit, .btn-delete {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        text-decoration: none;
+        margin-right: 5px;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn-edit {
+        background-color: #ffc107;
+        color: #212529;
+        border: 1px solid #e0a800;
+    }
+
+    .btn-edit:hover {
+        background-color: #e0a800;
+        color: white;
+        transform: scale(1.05);
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        color: white;
+        border: 1px solid #bd2130;
+    }
+
+    .btn-delete:hover {
+        background-color: #bd2130;
+        transform: scale(1.05);
+    }
+
+    .btn-add {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-add:hover {
+        background-color: #218838;
+        transform: scale(1.05);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #4e73df;
+        color: white;
+    }
+
+    tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        padding: 8px 14px;
+        border-radius: 6px;
+        background-color: #4e73df;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #2e59d9;
+    }
+
+    .pagination {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .pagination a {
+        display: inline-block;
+        padding: 8px 12px;
+        margin: 0 4px;
+        border-radius: 6px;
+        text-decoration: none;
+        background-color: #f1f1f1;
+        color: #333;
+        transition: background 0.3s;
+    }
+
+    .pagination a:hover {
+        background-color: #d6d6d6;
+    }
+
+    .pagination a.active {
+        background-color: #4e73df;
+        color: white;
+        font-weight: bold;
+    }
+</style>
+
 <div class="content">
     <h2>Jadwal Ekstrakurikuler</h2>
 
@@ -72,7 +201,6 @@ $data = mysqli_query($conn, "SELECT j.*, e.nama_ekskul FROM siswa_eskul se
         </tbody>
     </table>
 
-    <!-- PAGINATION -->
     <?php if ($total_pages > 1): ?>
     <div class="pagination" style="margin-top: 15px;">
         <?php for ($i = 1; $i <= $total_pages; $i++): ?>

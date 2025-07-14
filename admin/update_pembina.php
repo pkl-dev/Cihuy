@@ -17,17 +17,14 @@ if (isset($_POST['update'])) {
     $nip = $_POST['nip'];
     $id_ekskul = $_POST['id_ekskul'];
 
-    // Validasi username unik
     $cek = mysqli_query($conn, "SELECT * FROM pembina WHERE username='$username' AND id_pembina!='$id'");
     if (mysqli_num_rows($cek) > 0) {
         echo "<script>alert('Username sudah digunakan!'); history.back();</script>";
         exit();
     }
 
-    // Update data
     mysqli_query($conn, "UPDATE pembina SET nama='$nama', username='$username', nip='$nip' WHERE id_pembina='$id'");
 
-    // Reset pembina ekskul
     mysqli_query($conn, "UPDATE ekskul SET id_pembina=NULL WHERE id_pembina='$id'");
     mysqli_query($conn, "UPDATE ekskul SET id_pembina='$id' WHERE id_ekskul='$id_ekskul'");
 
@@ -63,8 +60,28 @@ $ekskul = mysqli_query($conn, "SELECT * FROM ekskul");
             <?php endwhile; ?>
         </select>
 
-        <button type="submit" name="update">Update</button>
-        <a href="manajemen_pembina.php" class="btn">Kembali</a>
+        <div style="margin-top: 20px; display: flex; gap: 10px;">
+            <button type="submit" name="update" style="
+                background-color: #4e73df;
+                color: white;
+                padding: 10px 16px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 15px;
+            ">💾 Update</button>
+
+            <a href="manajemen_pembina.php" style="
+                background-color: #6c757d;
+                color: white;
+                padding: 10px 16px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-size: 15px;
+                display: inline-block;
+                line-height: 1.5;
+            ">⬅️ Kembali</a>
+        </div>
     </form>
 </div>
 

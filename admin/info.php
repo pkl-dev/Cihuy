@@ -3,21 +3,17 @@ include 'header.php';
 include 'sidebar.php';
 include '../koneksi.php';
 
-// Hitung total data
 $siswa_count = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM siswa"))['total'];
 $pembina_count = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM pembina"))['total'];
 $ekskul_count = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM ekskul"))['total'];
 $absensi_count = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM absensi"))['total'];
 
-// Cari keyword
 $keyword = isset($_GET['keyword']) ? mysqli_real_escape_string($conn, $_GET['keyword']) : '';
 
-// Hasil pencarian (gabungan)
 $siswa_result = mysqli_query($conn, "SELECT * FROM siswa WHERE nama LIKE '%$keyword%' OR nis LIKE '%$keyword%'");
 $pembina_result = mysqli_query($conn, "SELECT * FROM pembina WHERE nama LIKE '%$keyword%' OR nip LIKE '%$keyword%'");
 $ekskul_result = mysqli_query($conn, "SELECT * FROM ekskul WHERE nama_ekskul LIKE '%$keyword%'");
 
-// Aktivitas terbaru
 $recent_absen = mysqli_query($conn, "
     SELECT a.*, s.nama, e.nama_ekskul 
     FROM absensi a 
@@ -46,7 +42,6 @@ $recent_absen = mysqli_query($conn, "
         <p style="font-size: 16px; margin-top: 8px;">Selamat datang di <b>Dashboard Admin</b> Sistem Absensi Ekstrakurikuler.</p>
     </div>
 
-    <!-- Statistik -->
     <div class="grid">
         <div class="card"><h3>👨‍🎓 Siswa</h3><p><?= $siswa_count ?></p></div>
         <div class="card"><h3>🧑‍🏫 Pembina</h3><p><?= $pembina_count ?></p></div>
@@ -54,7 +49,6 @@ $recent_absen = mysqli_query($conn, "
         <div class="card"><h3>📝 Absensi</h3><p><?= $absensi_count ?></p></div>
     </div>
 
-    <!-- Fitur -->
     <div class="section">
         <h2>Fitur Admin</h2>
         <ul>
@@ -64,7 +58,6 @@ $recent_absen = mysqli_query($conn, "
         </ul>
     </div>
 
-    <!-- Pencarian & Hasil -->
     <div class="section search-box">
         <h3>Pencarian Cepat 🔍</h3>
         <form method="GET">
@@ -112,7 +105,6 @@ $recent_absen = mysqli_query($conn, "
         <?php endif; ?>
     </div>
 
-    <!-- Aktivitas -->
     <div class="section">
         <h3>🕒 Aktivitas Terbaru</h3>
         <ul>

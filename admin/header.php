@@ -1,5 +1,4 @@
 <?php
-session_start();
 if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'admin') {
     header("Location: ../index.php");
     exit();
@@ -14,7 +13,6 @@ if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'admin') {
 </head>
 <body>
 
-<!-- Toggle Tema -->
 <div class="theme-switch-wrapper">
     <label class="theme-switch">
         <input type="checkbox" id="themeToggle">

@@ -1,4 +1,4 @@
-<!-- FILE: sidebar.php -->
+
 <div class="sidebar">
     <h2>Admin Panel</h2>
 
@@ -6,14 +6,13 @@
     <a href="manajemen_siswa.php">👨‍🎓 Manajemen Siswa</a>
     <a href="manajemen_pembina.php">🧑‍🏫 Manajemen Pembina</a>
     <a href="manajemen_eskul.php">🏅 Manajemen Ekskul</a>
-    <a href="riwayat_pembina.php">📝 Riwayat
-    Absensi Pembina</a>
-        <a href="riwayat_siswa.php">📝 Riwayat Absensi Siswa</a>
+    <a href="riwayat_pembina.php">📝 Riwayat Pembina</a>
+        <a href="riwayat_siswa.php">📝 Riwayat Siswa</a>
     <a href="../logout.php">🚪 Logout</a>
 </div>
 
 <style>
-/* Sidebar */
+
 .sidebar {
     width: 230px;
     height: 100vh;

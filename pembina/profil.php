@@ -1,4 +1,5 @@
 <?php  
+session_start();
 include 'header.php';  
 include '../koneksi.php';  
 
@@ -9,10 +10,8 @@ if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'pembina') {
 
 $id = $_SESSION['id'];
 
-// Ambil data pembina
 $data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM pembina WHERE id_pembina='$id'"));
 
-// Ambil ekskul yang dibimbing pembina
 $ekskul_query = mysqli_query($conn, "
     SELECT e.nama_ekskul 
     FROM ekskul pe
@@ -25,7 +24,6 @@ while ($e = mysqli_fetch_assoc($ekskul_query)) {
     $nama_ekskul[] = $e['nama_ekskul'];
 }
 
-// Proses update profil
 if (isset($_POST['update_profil'])) {
     $namaBaru = $_POST['nama'];
     $usernameBaru = $_POST['username'];
@@ -33,7 +31,7 @@ if (isset($_POST['update_profil'])) {
     if ($namaBaru != $data['nama'] || $usernameBaru != $data['username']) {
         $update = mysqli_query($conn, "UPDATE pembina SET nama='$namaBaru', username='$usernameBaru' WHERE id_pembina='$id'");
         if ($update) {
-            // Update session
+          
             $_SESSION['nama'] = $namaBaru;
             echo "<script>alert('Profil berhasil diperbarui'); location.href='profil.php';</script>";
         } else {

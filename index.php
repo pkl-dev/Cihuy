@@ -3,7 +3,7 @@ session_start();
 include 'koneksi.php';
 
 $error = "";
-$debug = ""; // variabel untuk menampilkan pesan debug
+$debug = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input = mysqli_real_escape_string($conn, $_POST['username']);
@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if (!$result) {
                 $debug .= "Query error: " . mysqli_error($conn) . "<br>";
+                continue;
             }
 
             if ($row = mysqli_fetch_assoc($result)) {
@@ -29,9 +30,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 if (password_verify($password, $row['password'])) {
                     $debug .= "✅ Password cocok.<br>";
-                    $_SESSION['id'] = $row[$user['id']];
-                    $_SESSION['nama'] = $row['nama'];
-                    $_SESSION['level'] = $user['role'];
+
+                    $_SESSION['id'] = $row[$user['id']];    
+                    $_SESSION['nama'] = $row['nama'];          
+                    $_SESSION['level'] = $user['role'];        
+
+                    if ($user['role'] === 'pembina') {
+                        $_SESSION['id_pembina'] = $row['id_pembina'];
+                    } elseif ($user['role'] === 'siswa') {
+                        $_SESSION['id_siswa'] = $row['id_siswa'];
+                    } elseif ($user['role'] === 'admin') {
+                        $_SESSION['id_admin'] = $row['id_admin'];
+                    }
+
                     header("Location: {$user['role']}/dashboard_{$user['role']}.php");
                     exit();
                 } else {
@@ -54,10 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <title>Login Ekstrakurikuler</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
+        * { box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(to right, #4e73df, #224abe);
@@ -67,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             height: 100vh;
             margin: 0;
         }
-
         .login-box {
             background-color: #ffffff;
             padding: 40px;
@@ -76,13 +83,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             width: 100%;
             max-width: 400px;
         }
-
         .login-box h2 {
             text-align: center;
             color: #224abe;
             margin-bottom: 20px;
         }
-
         .login-box input {
             width: 100%;
             padding: 12px;
@@ -91,11 +96,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border-radius: 8px;
             font-size: 14px;
         }
-
         .password-wrapper {
             position: relative;
         }
-
         .toggle-password {
             position: absolute;
             top: 12px;
@@ -104,7 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             user-select: none;
             font-size: 16px;
         }
-
         .login-box button {
             width: 100%;
             background-color: #4e73df;
@@ -116,17 +118,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             cursor: pointer;
             transition: background 0.3s;
         }
-
         .login-box button:hover {
             background-color: #224abe;
         }
-
         .error {
             color: red;
             text-align: center;
             margin-bottom: 10px;
         }
-
         .debug {
             font-size: 13px;
             background: #f5f5f5;
@@ -134,11 +133,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             margin-top: 10px;
             border: 1px dashed #ccc;
         }
-
         @media (max-width: 480px) {
-            .login-box {
-                padding: 20px;
-            }
+            .login-box { padding: 20px; }
         }
     </style>
 </head>

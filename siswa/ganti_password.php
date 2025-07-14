@@ -4,20 +4,18 @@ include '../koneksi.php';
 include 'header.php';
 include 'sidebar.php';
 
-// Cek apakah user sudah login sebagai siswa
 if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'siswa') {
     header("Location: ../index.php");
     exit();
 }
 
-$id = $_SESSION['id']; // ID siswa
+$id = $_SESSION['id']; 
 
 if (isset($_POST['ganti_password'])) {
     $pass_lama = $_POST['password_lama'];
     $pass_baru = $_POST['password_baru'];
     $konfirmasi = $_POST['konfirmasi'];
 
-    // Cek apakah siswa ditemukan
     $q = mysqli_query($conn, "SELECT password FROM siswa WHERE id_siswa = '$id'");
     if ($q && mysqli_num_rows($q) > 0) {
         $data = mysqli_fetch_assoc($q);

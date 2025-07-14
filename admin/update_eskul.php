@@ -53,8 +53,29 @@ include 'sidebar.php';
             </select>
 
             <div class="form-actions">
-                <button type="submit" name="update">💾 Simpan Perubahan</button>
-                <a href="manajemen_eskul.php" class="btn-cancel">⬅️ Batal</a>
+
+                <div style="margin-top: 20px; display: flex; gap: 10px;">
+                    <button type="submit" name="update" style="
+                        background-color: #4e73df;
+                        color: white;
+                        padding: 10px 16px;
+                        border: none;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 15px;
+                    ">💾 Update</button>
+
+                    <a href="manajemen_siswa.php" style="
+                        background-color: #6c757d;
+                        color: white;
+                        padding: 10px 16px;
+                        border-radius: 8px;
+                        text-decoration: none;
+                        font-size: 15px;
+                        display: inline-block;
+                        line-height: 1.5;
+                    ">⬅️ Kembali</a>
+                </div>
             </div>
         </form>
     </div>

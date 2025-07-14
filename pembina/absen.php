@@ -4,7 +4,6 @@ include '../koneksi.php';
 include 'header.php';
 include 'sidebar.php';
 
-// Cek login level pembina
 if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'pembina') {
     header("Location: ../index.php");
     exit();
@@ -14,13 +13,11 @@ $id_pembina = $_SESSION['id'];
 $nama_pembina = $_SESSION['nama'] ?? '';
 $pesan = '';
 
-// Ambil ekskul yang dibina
 $q = mysqli_query($conn, "SELECT * FROM ekskul WHERE id_pembina = '$id_pembina' LIMIT 1");
 $ekskul = mysqli_fetch_assoc($q);
 $nama_ekskul = $ekskul['nama_ekskul'] ?? 'Tidak ditemukan';
 $id_ekskul = $ekskul['id_ekskul'] ?? 0;
 
-// Proses form absensi pembina
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tanggal = $_POST['tanggal'] ?? '';
     $kehadiran = $_POST['kehadiran'] ?? '';

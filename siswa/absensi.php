@@ -12,7 +12,6 @@ if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'siswa') {
 $id_siswa = $_SESSION['id'];
 $nama = $_SESSION['nama'];
 
-// Ambil nama ekskul
 $queryEskul = mysqli_query($conn, "SELECT e.nama_ekskul FROM siswa_eskul se 
     JOIN ekskul e ON se.id_ekskul = e.id_ekskul 
     WHERE se.id_siswa = '$id_siswa' LIMIT 1");
@@ -77,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <option value="Hadir">Hadir</option>
             <option value="Izin">Izin</option>
             <option value="Sakit">Sakit</option>
-            <option value="Alfa">Alfa</option>
         </select>
 
         <label for="foto" style="font-weight: bold;">Foto Bukti</label>

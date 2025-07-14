@@ -8,9 +8,8 @@ if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'pembina') {
 }
 
 $id_pembina = $_SESSION['id'];
-$id_jadwal = intval($_GET['id']); // pastikan angka
+$id_jadwal = intval($_GET['id']); 
 
-// Cek apakah jadwal tersebut milik ekskul pembina ini
 $cek = mysqli_query($conn, "
     SELECT j.* FROM jadwal j
     JOIN ekskul e ON j.id_ekskul = e.id_ekskul

@@ -2,7 +2,6 @@
 session_start();
 include '../koneksi.php';
 
-// Cek apakah user adalah pembina
 if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'pembina') {
     header("Location: ../index.php");
     exit();
@@ -10,7 +9,6 @@ if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'pembina') {
 
 $id_pembina = $_SESSION['id'];
 
-// SEARCH & PAGINATION
 $search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $per_page = 5;
@@ -21,7 +19,6 @@ if ($search) {
     $where .= " AND (j.hari LIKE '%$search%' OR e.nama_ekskul LIKE '%$search%')";
 }
 
-// Hitung total data
 $total_query = mysqli_query($conn, "SELECT COUNT(*) as total FROM ekskul pe 
     JOIN ekskul e ON pe.id_ekskul = e.id_ekskul 
     JOIN jadwal j ON j.id_ekskul = e.id_ekskul 
@@ -29,7 +26,6 @@ $total_query = mysqli_query($conn, "SELECT COUNT(*) as total FROM ekskul pe
 $total = mysqli_fetch_assoc($total_query)['total'];
 $total_pages = ceil($total / $per_page);
 
-// Ambil data jadwal
 $data = mysqli_query($conn, "SELECT j.*, e.nama_ekskul FROM ekskul pe 
     JOIN ekskul e ON pe.id_ekskul = e.id_ekskul 
     JOIN jadwal j ON j.id_ekskul = e.id_ekskul 
@@ -41,7 +37,6 @@ $data = mysqli_query($conn, "SELECT j.*, e.nama_ekskul FROM ekskul pe
 <?php include 'header.php'; ?>
 <?php include 'sidebar.php'; ?>
 
-<!-- STYLING -->
 <style>
     .content {
         padding: 20px;
@@ -134,7 +129,6 @@ $data = mysqli_query($conn, "SELECT j.*, e.nama_ekskul FROM ekskul pe
     }
 </style>
 
-<!-- ISI KONTEN -->
 <div class="content">
     <h2>Kelola Jadwal Ekstrakurikuler</h2>
 
@@ -176,7 +170,6 @@ $data = mysqli_query($conn, "SELECT j.*, e.nama_ekskul FROM ekskul pe
         </tbody>
     </table>
 
-    <!-- PAGINATION -->
     <?php if ($total_pages > 1): ?>
     <div class="pagination">
         <?php for ($i = 1; $i <= $total_pages; $i++): ?>

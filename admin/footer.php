@@ -18,7 +18,6 @@
         }
     });
 
-    // Saat halaman dimuat, cek preferensi
     (function () {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'dark') {

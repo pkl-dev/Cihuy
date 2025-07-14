@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'pembina') {
     header("Location: ../index.php");
     exit();
@@ -14,7 +14,6 @@ if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'pembina') {
 </head>
 <body>
 
-<!-- === Toggle Tema === -->
 <div class="theme-switch-wrapper">
     <label class="theme-switch">
         <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
@@ -40,7 +39,7 @@ function toggleTheme() {
     }
 }
 
-// Saat halaman dimuat, cek localStorage
+
 (function () {
     const savedTheme = localStorage.getItem("theme");
     const toggle = document.getElementById("themeToggle");

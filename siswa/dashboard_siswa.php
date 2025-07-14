@@ -1,6 +1,12 @@
+<?php session_start(); ?>
 <?php include 'header.php'; ?>
 <?php include 'sidebar.php'; ?>
 
+<style>
+    a{
+        color:black;
+    }
+</style>
 <div class="content" style="font-family: 'Segoe UI', sans-serif; padding: 20px;">
 
     <div style="
@@ -23,9 +29,9 @@
     ">
         <h2 style="margin-top: 0;">Petunjuk Penggunaan</h2>
         <ul style="line-height: 1.8;">
-            <li>Lakukan <b>absensi</b> ekskul sesuai jadwal dengan mengunggah foto bukti.</li>
-            <li>Cek <b>jadwal ekskul</b> kamu di menu jadwal.</li>
-            <li>Lihat <b>riwayat absensi</b> kamu untuk memastikan kehadiran tercatat.</li>
+            <li>Lakukan <b><a href="absensi.php">absensi</a></b> ekskul sesuai jadwal dengan mengunggah foto bukti.</li>
+            <li>Cek <b><a href="jadwal.php">jadwal ekskul </a></b> kamu di menu jadwal.</li>
+            <li>Lihat <b><a href="riwayat.php">riwayat absensi</a></b> kamu untuk memastikan kehadiran tercatat.</li>
         </ul>
         <p style="margin-top: 10px;">Gunakan menu di sebelah kiri untuk mulai menggunakan sistem. Semangat dan tetap aktif ikut ekskul ya! 🏃‍♂️✨</p>
     </div>

@@ -1,3 +1,4 @@
+<?php session_start();?>
 <?php include 'header.php'; ?>
 <?php include 'sidebar.php'; ?>
 
@@ -22,7 +23,7 @@
     ">
         <h2 style="margin-top: 0;">Panduan Singkat</h2>
         <ul style="line-height: 1.8;">
-            <li>Kelola siswa yang mengikuti ekskul Anda melalui menu <b>Manajemen Siswa</b>.</li>
+            <li>Kelola siswa yang mengikuti ekskul Anda melalui menu <b>Data Siswa</b>.</li>
             <li>Cek dan sesuaikan <b>Jadwal Ekskul</b> Anda sesuai kebutuhan.</li>
             <li>Lihat laporan <b>Absensi</b> siswa secara real-time.</li>
         </ul>

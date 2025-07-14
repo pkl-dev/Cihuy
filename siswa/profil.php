@@ -10,10 +10,8 @@ if (!isset($_SESSION['id']) || $_SESSION['level'] !== 'siswa') {
 
 $id = $_SESSION['id'];
 
-// Ambil data siswa
 $data = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM siswa WHERE id_siswa='$id'"));
 
-// Ambil nama ekskul
 $nama_ekskul = [];
 $ekskul_query = mysqli_query($conn, "
     SELECT e.nama_ekskul FROM siswa_eskul se
@@ -24,7 +22,6 @@ while ($e = mysqli_fetch_assoc($ekskul_query)) {
     $nama_ekskul[] = $e['nama_ekskul'];
 }
 
-// Proses update profil
 if (isset($_POST['update_profil'])) {
     $namaBaru = $_POST['nama'];
     $usernameBaru = $_POST['username'];

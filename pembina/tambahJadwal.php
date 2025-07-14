@@ -9,7 +9,6 @@ if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'pembina') {
 
 $id_pembina = $_SESSION['id'];
 
-// Ambil ekskul yang dibina pembina
 $ekskul_query = mysqli_query($conn, "
     SELECT e.id_ekskul, e.nama_ekskul 
     FROM ekskul pe 

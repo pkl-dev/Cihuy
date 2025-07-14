@@ -9,7 +9,6 @@ if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'siswa') {
 
 $id = $_SESSION['id'];
 
-// Ambil filter bulan & tahun
 $filter_bulan = $_GET['bulan'] ?? '';
 $filter_tahun = $_GET['tahun'] ?? '';
 $search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
@@ -18,7 +17,6 @@ $limit = 5;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start = ($page - 1) * $limit;
 
-// Query filter
 $filterSql = "AND a.id_siswa='$id'";
 if ($filter_bulan && $filter_tahun) {
     $filterSql .= " AND MONTH(a.tanggal) = '$filter_bulan' AND YEAR(a.tanggal) = '$filter_tahun'";
@@ -27,7 +25,6 @@ if ($search) {
     $filterSql .= " AND (e.nama_ekskul LIKE '%$search%' OR a.kehadiran LIKE '%$search%' OR a.tanggal LIKE '%$search%')";
 }
 
-// Data utama
 $sql = "SELECT * FROM absensi a 
         JOIN ekskul e ON a.id_ekskul = e.id_ekskul 
         WHERE 1=1 $filterSql 
@@ -35,14 +32,12 @@ $sql = "SELECT * FROM absensi a
         LIMIT $start, $limit";
 $data = mysqli_query($conn, $sql);
 
-// Total data
 $totalQuery = mysqli_query($conn, "SELECT COUNT(*) as total FROM absensi a 
     JOIN ekskul e ON a.id_ekskul = e.id_ekskul 
     WHERE 1=1 $filterSql");
 $totalData = mysqli_fetch_assoc($totalQuery)['total'];
 $totalPages = ceil($totalData / $limit);
 
-// Ambil data terakhir absen
 $lastAbsen = mysqli_query($conn, "SELECT tanggal, kehadiran FROM absensi WHERE id_siswa='$id' ORDER BY tanggal DESC LIMIT 1");
 $last = mysqli_fetch_assoc($lastAbsen);
 ?>
@@ -57,7 +52,6 @@ $last = mysqli_fetch_assoc($lastAbsen);
         Terakhir absen: <?= $last ? date("d M Y", strtotime($last['tanggal'])) . " (" . $last['kehadiran'] . ")" : "Belum ada" ?>
     </p>
 
-    <!-- FILTER -->
     <form method="GET" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
         <select name="bulan" style="padding: 8px; border-radius: 8px;">
             <option value="">Semua Bulan</option>
@@ -72,7 +66,7 @@ $last = mysqli_fetch_assoc($lastAbsen);
             <option value="">Semua Tahun</option>
             <?php
             $tahunSekarang = date('Y');
-            for ($t = $tahunSekarang; $t >= $tahunSekarang - 5; $t--): ?>
+            for ($t = $tahunSekarang ; $t >= $tahunSekarang - 5; $t--): ?>
                 <option value="<?= $t ?>" <?= $t == $filter_tahun ? 'selected' : '' ?>><?= $t ?></option>
             <?php endfor; ?>
         </select>
@@ -83,7 +77,6 @@ $last = mysqli_fetch_assoc($lastAbsen);
         <button type="submit" style="padding: 8px 15px; border-radius: 8px; background: #007bff; color: white; border: none;">Terapkan</button>
     </form>
 
-    <!-- TABEL -->
     <table style="width: 100%; border-collapse: collapse; font-family: sans-serif;">
         <thead>
             <tr style="background-color: #f7f7f7; text-align: left;">
@@ -132,7 +125,6 @@ $last = mysqli_fetch_assoc($lastAbsen);
         </tbody>
     </table>
 
-    <!-- PAGINATION -->
     <?php if ($totalPages > 1): ?>
     <div style="margin-top: 20px; text-align: center;">
         <?php if ($page > 1): ?>
@@ -152,7 +144,6 @@ $last = mysqli_fetch_assoc($lastAbsen);
     <?php endif; ?>
 </div>
 
-<!-- MODAL -->
 <div id="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
     background: rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:9999;">
     <div onclick="closeModal()" style="position:absolute; top:20px; right:30px; font-size:30px; color:white; cursor:pointer;">&times;</div>

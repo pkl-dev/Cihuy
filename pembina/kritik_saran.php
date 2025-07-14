@@ -2,7 +2,6 @@
 session_start();
 include '../koneksi.php';
 
-// Cek apakah user adalah pembina
 if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'pembina') {
     header("Location: ../index.php");
     exit();
@@ -11,7 +10,6 @@ if (!isset($_SESSION['level']) || $_SESSION['level'] !== 'pembina') {
 $id_pembina = $_SESSION['id'];
 $search = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 
-// Ambil data kritik & saran untuk ekskul yang dibina pembina ini
 $query = mysqli_query($conn, "
     SELECT ks.*, s.nama AS nama_siswa, e.nama_ekskul 
     FROM kritik_saran ks  
@@ -34,7 +32,6 @@ $query = mysqli_query($conn, "
 <div class="content">
     <h2>Daftar Kritik & Saran dari Siswa</h2>
 
-    <!-- Form Pencarian -->
     <form method="GET" style="margin-bottom: 15px;">
         <input type="text" name="search" placeholder="Cari nama siswa / ekskul / pesan..." 
                value="<?= htmlspecialchars($search); ?>" 
@@ -42,7 +39,6 @@ $query = mysqli_query($conn, "
         <button type="submit" style="padding: 8px 12px;">Cari</button>
     </form>
 
-    <!-- Tabel Kritik & Saran -->
     <table border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
         <thead style="background-color: #007bff; color: white;">
             <tr>

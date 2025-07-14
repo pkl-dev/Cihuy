@@ -1,7 +1,13 @@
 <?php
+session_start();
 include 'header.php';
 include 'sidebar.php';
 ?>
+<style>
+    a{
+        color:black;
+    }
+</style>
 
 <div class="content" style="font-family: 'Segoe UI', sans-serif; padding: 20px;">
 
@@ -27,10 +33,8 @@ include 'sidebar.php';
     ">
         <h2 style="margin-top: 0;">Fitur Admin</h2>
         <ul style="line-height: 1.8;">
-            <li>Kelola data <b>Siswa</b> dan <b>Pembina</b>.</li>
-            <li>Atur dan sesuaikan <b>jadwal ekskul</b>.</li>
-            <li>Kelola <b>data ekskul</b>, <b>absensi</b>, dan <b>pengguna</b>.</li>
-            <li>Review <b>kritik dan saran</b> dari siswa & pembina.</li>
+            <li>Kelola data <b><a href="manajemen_siswa.php">Siswa</a></b> dan <b><a href="manajemen_pembina.php">Pembina</a></b>.</li>
+            <li>Atur dan sesuaikan <b><a href="manajemen_eskul.php">Manajemen Ekskul</a></b>.</li>
         </ul>
         <p style="margin-top: 10px;">Gunakan menu di sidebar kiri untuk mengakses fitur admin. Jadilah admin bijak yang dicintai seluruh ekskul! 😎🧠</p>
     </div>

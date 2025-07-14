@@ -11,7 +11,7 @@
 
 [data-theme="dark"] {
     --bg: #1e1e2f;
-    --text: #e0e0e0;
+    --text: #000000;
     --sidebar-bg: #111827;
     --sidebar-text: #f4f6f9;
     --primary: #375ab7;
@@ -31,7 +31,6 @@ body {
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* Sidebar */
 .sidebar {
     width: 230px;
     height: 100vh;
@@ -59,13 +58,11 @@ body {
     background-color: var(--primary);
 }
 
-/* Konten */
 .content {
     margin-left: 230px;
     padding: 30px;
 }
 
-/* Input, Textarea, Select */
 textarea, input[type="text"], input[type="date"], input[type="file"], select {
     width: 100%;
     padding: 12px;
@@ -81,7 +78,6 @@ input[readonly] {
     cursor: not-allowed;
 }
 
-/* Tombol */
 button, input[type="submit"] {
     background-color: var(--primary);
     color: white;
@@ -95,7 +91,6 @@ button:hover, input[type="submit"]:hover {
     background-color: var(--primary-dark);
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 15px;
@@ -107,7 +102,6 @@ footer {
     margin-left: 230px;
 }
 
-/* Tombol Switch Tema */
 .theme-switch-wrapper {
     position: fixed;
     top: 20px;
@@ -157,7 +151,6 @@ input:checked + .slider:before {
     transform: translateX(30px);
 }
 
-/* Tabel */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -175,7 +168,6 @@ th {
     color: white;
 }
 
-/* Search */
 form input[type="text"] {
     padding: 10px;
     width: 300px;
@@ -223,7 +215,7 @@ form button:hover {
     font-weight: bold;
     cursor: pointer;
 }
-/* Pagination */
+
 .pagination {
     margin-top: 20px;
     text-align: center;
@@ -244,7 +236,6 @@ form button:hover {
     color: white;
 }
 
-/* Responsive */
 @media screen and (max-width: 768px) {
     .sidebar {
         width: 100%;
